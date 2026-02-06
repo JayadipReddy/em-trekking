@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: trekky-hub
+  name: frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: trekky-hub
+      app: frontend
   template:
     metadata:
       labels:
-        app: trekky-hub
+        app: frontend
     spec:
       containers:
-        - name: trekky-hub
-          image: jayadip07/trekky-hub:latest
-          ports:
-            - containerPort: 8000
+      - name: frontend
+        image: jayadip07/trekky-frontend:latest
+        ports:
+        - containerPort: 3000
