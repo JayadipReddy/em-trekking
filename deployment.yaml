@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trekky-hub
+  labels:
+    app: trekky-hub
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trekky-hub
+  template:
+    metadata:
+      labels:
+        app: trekky-hub
+    spec:
+      containers:
+        - name: trekky-hub
+          image: jayadip07/trekky-hub:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000   # Backend (FastAPI)
+            - containerPort: 3000   # Frontend (Next.js)
