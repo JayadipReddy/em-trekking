@@ -20,7 +20,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh '''
+                bat '''
                 docker build -t $DOCKER_IMAGE:$IMAGE_TAG .
                 '''
             }
@@ -33,7 +33,7 @@ pipeline {
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
-                    sh '''
+                    bat '''
                     echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
                     docker push $DOCKER_IMAGE:$IMAGE_TAG
                     '''
@@ -43,7 +43,7 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh '''
+                bat '''
                 # 🔁 REPLACE deployment-name and container-name
                 kubectl set image -n $K8S_NAMESPACE -n deployment/kube-system \
                   <coredns>=$DOCKER_IMAGE:$IMAGE_TAG
