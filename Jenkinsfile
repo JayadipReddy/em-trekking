@@ -5,7 +5,6 @@ pipeline {
         DOCKER_USERNAME = "jayadip07"
         BACKEND_IMAGE   = "trekky-backend"
         FRONTEND_IMAGE  = "trekky-frontend"
-        IMAGE_TAG       = "%BUILD_NUMBER%"
         K8S_NAMESPACE   = "dev"
     }
 
@@ -19,8 +18,8 @@ pipeline {
 
         stage('Build Docker Images') {
             steps {
-                bat 'docker build -t %DOCKER_USERNAME%/%BACKEND_IMAGE%:%IMAGE_TAG% backend'
-                bat 'docker build -t %DOCKER_USERNAME%/%FRONTEND_IMAGE%:%IMAGE_TAG% frontend'
+                bat "docker build -t %DOCKER_USERNAME%/%BACKEND_IMAGE%:%BUILD_NUMBER% backend"
+                bat "docker build -t %DOCKER_USERNAME%/%FRONTEND_IMAGE%:%BUILD_NUMBER% frontend"
             }
         }
 
@@ -31,21 +30,15 @@ pipeline {
                     usernameVariable: 'DH_USER',
                     passwordVariable: 'DH_PASS'
                 )]) {
-                    bat 'docker login -u %DH_USER% -p %DH_PASS%'
+                    bat "docker login -u %DH_USER% -p %DH_PASS%"
                 }
             }
         }
 
         stage('Push to Docker Hub') {
             steps {
-                bat 'docker push %DOCKER_USERNAME%/%BACKEND_IMAGE%:%IMAGE_TAG%'
-                bat 'docker push %DOCKER_USERNAME%/%FRONTEND_IMAGE%:%IMAGE_TAG%'
-            }
-        }
-
-        stage('Deploy to Kubernetes') {
-            steps {
-                echo "Kubernetes deploy will be enabled after manifests are ready"
+                bat "docker push %DOCKER_USERNAME%/%BACKEND_IMAGE%:%BUILD_NUMBER%"
+                bat "docker push %DOCKER_USERNAME%/%FRONTEND_IMAGE%:%BUILD_NUMBER%"
             }
         }
     }
