@@ -12,40 +12,32 @@ pipeline {
 
         stage('Docker Info') {
             steps {
-                sh 'docker --version'
-                sh 'docker compose version'
+                bat 'docker --version'
+                bat 'docker compose version'
             }
         }
 
         stage('Stop Existing Containers') {
             steps {
-                sh '''
-                docker compose down || true
-                '''
+                bat 'docker compose down || exit 0'
             }
         }
 
         stage('Build Docker Images') {
             steps {
-                sh '''
-                docker compose build
-                '''
+                bat 'docker compose build'
             }
         }
 
         stage('Run Containers') {
             steps {
-                sh '''
-                docker compose up -d
-                '''
+                bat 'docker compose up -d'
             }
         }
 
         stage('Verify Containers') {
             steps {
-                sh '''
-                docker ps
-                '''
+                bat 'docker ps'
             }
         }
     }
