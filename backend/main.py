@@ -1,0 +1,61 @@
+from fastapi import FastAPI, Depends
+from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy.orm import Session
+
+from database import SessionLocal, engine
+from models import Base, User
+from schemas import RegisterRequest, LoginRequest
+
+app = FastAPI()
+
+# ✅ Create tables
+Base.metadata.create_all(bind=engine)
+
+# ✅ CORS for Next.js
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# DB dependency
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+# ✅ Register
+@app.post("/register")
+def register(user: RegisterRequest, db: Session = Depends(get_db)):
+    existing_user = db.query(User).filter(User.email == user.email).first()
+    if existing_user:
+        return {"success": False, "message": "Email already exists"}
+
+    new_user = User(
+        name=user.name,
+        email=user.email,
+        password=user.password   # hashing later
+    )
+
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+
+    return {"success": True, "message": "User registered successfully"}
+
+# ✅ Login
+@app.post("/login")
+def login(user: LoginRequest, db: Session = Depends(get_db)):
+    db_user = db.query(User).filter(
+        User.email == user.email,
+        User.password == user.password
+    ).first()
+
+    if not db_user:
+        return {"success": False, "message": "Invalid email or password"}
+
+    return {"success": True, "message": "Login successful"}
