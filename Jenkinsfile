@@ -2,12 +2,11 @@ pipeline {
     agent any
 
     environment {
-        // 🔁 REPLACE these two values
-        DOCKER_IMAGE = "jayadip07/trekky-hub"
-        IMAGE_TAG    = "${BUILD_NUMBER}"
-
-        // 🔁 REPLACE namespace if different
-        K8S_NAMESPACE = "dev"
+        DOCKER_USERNAME = "jayadip07"
+        BACKEND_IMAGE   = "trekky-backend"
+        FRONTEND_IMAGE  = "trekky-frontend"
+        IMAGE_TAG       = "%BUILD_NUMBER%"
+        K8S_NAMESPACE   = "dev"
     }
 
     stages {
@@ -18,41 +17,36 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Build Docker Images') {
             steps {
-                bat '''
-                docker build -t $DOCKER_IMAGE:$IMAGE_TAG .
-                '''
+                bat 'docker build -t %DOCKER_USERNAME%/%BACKEND_IMAGE%:%IMAGE_TAG% backend'
+                bat 'docker build -t %DOCKER_USERNAME%/%FRONTEND_IMAGE%:%IMAGE_TAG% frontend'
+            }
+        }
+
+        stage('Docker Login') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'DH_USER',
+                    passwordVariable: 'DH_PASS'
+                )]) {
+                    bat 'docker login -u %DH_USER% -p %DH_PASS%'
+                }
             }
         }
 
         stage('Push to Docker Hub') {
             steps {
-                withCredentials([usernamePassword(
-                    credentialsId: 'dockerhub-creds',
-                    usernameVariable: 'DOCKER_USER',
-                    passwordVariable: 'DOCKER_PASS'
-                )]) {
-                    bat '''
-                    echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                    docker push $DOCKER_IMAGE:$IMAGE_TAG
-                    '''
-                }
+                bat 'docker push %DOCKER_USERNAME%/%BACKEND_IMAGE%:%IMAGE_TAG%'
+                bat 'docker push %DOCKER_USERNAME%/%FRONTEND_IMAGE%:%IMAGE_TAG%'
             }
         }
 
         stage('Deploy to Kubernetes') {
             steps {
-                bat '''
-                # 🔁 REPLACE deployment-name and container-name
-                kubectl set image -n $K8S_NAMESPACE -n deployment/kube-system \
-                  <coredns>=$DOCKER_IMAGE:$IMAGE_TAG
-
-                kubectl rollout status -n $K8S_NAMESPACE deployment/kube-system
-                '''
+                echo "Kubernetes deploy will be enabled after manifests are ready"
             }
         }
     }
 }
-
- 
