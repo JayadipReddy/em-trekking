@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DEPLOY_DIR = "C:\\deployments\\trekky-hub"
+        DEPLOY_DIR = "/opt/deployments/trekky-hub"
         BACKEND_PORT = "8000"
         FRONTEND_PORT = "3000"
     }
@@ -16,29 +16,22 @@ pipeline {
             }
         }
 
-        stage('Copy Code to Local Deployment Folder') {
+        stage('Copy Code') {
             steps {
-                bat '''
-                if not exist %DEPLOY_DIR% (
-                    mkdir %DEPLOY_DIR%
-                )
-
-                xcopy /E /I /Y backend %DEPLOY_DIR%\\backend
-                xcopy /E /I /Y frontend %DEPLOY_DIR%\\frontend
+                sh '''
+                mkdir -p $DEPLOY_DIR
+                cp -r backend $DEPLOY_DIR/
+                cp -r frontend $DEPLOY_DIR/
                 '''
             }
         }
 
         stage('Backend Setup') {
             steps {
-                bat '''
-                cd %DEPLOY_DIR%\\backend
-
-                if not exist .venv (
-                    python -m venv .venv
-                )
-
-                call .\\.venv\\Scripts\\activate
+                sh '''
+                cd $DEPLOY_DIR/backend
+                python3 -m venv .venv
+                . .venv/bin/activate
                 pip install -r requirements.txt
                 '''
             }
@@ -46,31 +39,13 @@ pipeline {
 
         stage('Frontend Build') {
             steps {
-                bat '''
-                cd %DEPLOY_DIR%\\frontend
+                sh '''
+                cd $DEPLOY_DIR/frontend
                 npm install
                 npm run build
                 '''
             }
         }
-
-        stage('Start Backend') {
-            steps {
-                bat '''
-                cd %DEPLOY_DIR%\\backend
-                call .\\.venv\\Scripts\\activate
-                start "" /B uvicorn main:app --host 0.0.0.0 --port %BACKEND_PORT%
-                '''
-            }
-        }
-
-        stage('Start Frontend') {
-            steps {
-                bat '''
-                cd %DEPLOY_DIR%\\frontend
-                start "" /B npx next start -p %FRONTEND_PORT%
-                '''
-            }
-        }
     }
 }
+ 
