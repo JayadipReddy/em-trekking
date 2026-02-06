@@ -1,6 +1,8 @@
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import OperationalError
+import time
 
 from database import SessionLocal, engine
 from models import Base, User
@@ -8,10 +10,7 @@ from schemas import RegisterRequest, LoginRequest
 
 app = FastAPI()
 
-# ✅ Create tables
-Base.metadata.create_all(bind=engine)
-
-# ✅ CORS for Next.js
+# ✅ CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],
@@ -20,13 +19,30 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# DB dependency
+# ✅ DB dependency
 def get_db():
     db = SessionLocal()
     try:
         yield db
     finally:
         db.close()
+
+# ✅ WAIT for DB before creating tables
+@app.on_event("startup")
+def startup_event():
+    retries = 10
+    while retries > 0:
+        try:
+            Base.metadata.create_all(bind=engine)
+            print("✅ Database connected")
+            break
+        except OperationalError as e:
+            print("⏳ Database not ready, retrying...")
+            retries -= 1
+            time.sleep(3)
+
+    if retries == 0:
+        raise Exception("❌ Database connection failed")
 
 # ✅ Register
 @app.post("/register")
@@ -38,7 +54,7 @@ def register(user: RegisterRequest, db: Session = Depends(get_db)):
     new_user = User(
         name=user.name,
         email=user.email,
-        password=user.password   # hashing later
+        password=user.password
     )
 
     db.add(new_user)

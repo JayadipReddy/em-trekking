@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-DATABASE_URL = "postgresql://postgres:root@localhost:5432/trekky-hub"
+DATABASE_URL = "postgresql://postgres:root@database:5432/trekky-hub"
 
 engine = create_engine(DATABASE_URL)
 
