@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        # Use Jenkins workspace to avoid permission issues
+        // Use Jenkins workspace to avoid permission issues
         DEPLOY_DIR = "${WORKSPACE}/deployments/trekky-hub"
         BACKEND_IMAGE = "trekky-backend:latest"
         FRONTEND_IMAGE = "trekky-frontend:latest"
@@ -50,13 +50,8 @@ pipeline {
         stage('Deploy Backend to Kubernetes') {
             steps {
                 sh '''
-                # Apply backend deployment
                 kubectl apply -f k8s/backend-deployment.yaml
-
-                # Update deployment image
                 kubectl set image deployment/trekky-backend backend=$BACKEND_IMAGE
-
-                # Wait for rollout
                 kubectl rollout status deployment/trekky-backend
                 '''
             }
@@ -65,13 +60,8 @@ pipeline {
         stage('Deploy Frontend to Kubernetes') {
             steps {
                 sh '''
-                # Apply frontend deployment
                 kubectl apply -f k8s/frontend-deployment.yaml
-
-                # Update deployment image
                 kubectl set image deployment/trekky-frontend frontend=$FRONTEND_IMAGE
-
-                # Wait for rollout
                 kubectl rollout status deployment/trekky-frontend
                 '''
             }
