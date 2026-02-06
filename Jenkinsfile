@@ -5,7 +5,7 @@ pipeline {
         DOCKER_USERNAME = "jayadip07"
         BACKEND_IMAGE   = "trekky-backend"
         FRONTEND_IMAGE  = "trekky-frontend"
-        K8S_NAMESPACE   = "dev"
+        K8S_NAMESPACE   = "default"
     }
 
     stages {
@@ -39,6 +39,15 @@ pipeline {
             steps {
                 bat "docker push %DOCKER_USERNAME%/%BACKEND_IMAGE%:%BUILD_NUMBER%"
                 bat "docker push %DOCKER_USERNAME%/%FRONTEND_IMAGE%:%BUILD_NUMBER%"
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                bat "kubectl apply -f k8s/backend-deployment.yaml"
+                bat "kubectl apply -f k8s/backend-service.yaml"
+                bat "kubectl apply -f k8s/frontend-deployment.yaml"
+                bat "kubectl apply -f k8s/frontend-service.yaml"
             }
         }
     }

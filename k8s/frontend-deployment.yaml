@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trekky-hub
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trekky-hub
+  template:
+    metadata:
+      labels:
+        app: trekky-hub
+    spec:
+      containers:
+        - name: trekky-hub
+          image: jayadip07/trekky-hub:latest
+          ports:
+            - containerPort: 8000
