@@ -1,44 +1,58 @@
 pipeline {
     agent any
 
+    environment {
+        // 🔁 REPLACE these two values
+        DOCKER_IMAGE = "jayadip07/trekky-hub"
+        IMAGE_TAG    = "${BUILD_NUMBER}"
+
+        // 🔁 REPLACE namespace if different
+        K8S_NAMESPACE = "dev"
+    }
+
     stages {
 
-        stage('Checkout Code') {
+        stage('Checkout') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/JayadipReddy/em-trekking.git'
+                checkout scm
             }
         }
 
-        stage('Docker Info') {
+        stage('Build Docker Image') {
             steps {
-                bat 'docker --version'
-                bat 'docker compose version'
+                sh '''
+                docker build -t $DOCKER_IMAGE:$IMAGE_TAG .
+                '''
             }
         }
 
-        stage('Stop Existing Containers') {
+        stage('Push to Docker Hub') {
             steps {
-                bat 'docker compose down || exit 0'
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sh '''
+                    echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                    docker push $DOCKER_IMAGE:$IMAGE_TAG
+                    '''
+                }
             }
         }
 
-        stage('Build Docker Images') {
+        stage('Deploy to Kubernetes') {
             steps {
-                bat 'docker compose build'
-            }
-        }
+                sh '''
+                # 🔁 REPLACE deployment-name and container-name
+                kubectl set image -n $K8S_NAMESPACE -n deployment/kube-system \
+                  <coredns>=$DOCKER_IMAGE:$IMAGE_TAG
 
-        stage('Run Containers') {
-            steps {
-                bat 'docker compose up -d'
-            }
-        }
-
-        stage('Verify Containers') {
-            steps {
-                bat 'docker ps'
+                kubectl rollout status -n $K8S_NAMESPACE deployment/kube-system
+                '''
             }
         }
     }
 }
+
+ 
