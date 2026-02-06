@@ -17,16 +17,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ---------- FRONTEND (Next.js) ----------
+      # Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
+      # Install frontend dependencies
       - name: Install frontend dependencies
         working-directory: frontend
         run: npm install
 
+      # Build frontend
       - name: Build frontend
         working-directory: frontend
         run: npm run build
