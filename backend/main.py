@@ -31,8 +31,8 @@ def get_db():
 # ✅ WAIT for DB before creating tables
 @app.on_event("startup")
 def startup_event():
-    if os.getenv("SKIP_DB", "false").lower() == "true":
-        print("⚠️ Skipping DB connection (SKIP_DB=true)")
+    if os.getenv("SKIP_DB") == "true":
+        print("⚠️ SKIP_DB enabled, skipping DB connection")
         return
 
     retries = 10
@@ -48,6 +48,7 @@ def startup_event():
 
     if retries == 0:
         raise Exception("❌ Database connection failed")
+
 
 # ✅ Register
 @app.post("/register")
