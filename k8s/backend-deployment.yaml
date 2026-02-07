@@ -18,6 +18,4 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
-    env:
-      - name: SKIP_DB
-        value: "true"
+
