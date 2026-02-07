@@ -15,5 +15,6 @@ spec:
       containers:
       - name: backend
         image: jayadip07/trekky-backend:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8000
