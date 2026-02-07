@@ -6,6 +6,8 @@ pipeline {
         BACKEND_IMAGE   = "trekky-backend"
         FRONTEND_IMAGE  = "trekky-frontend"
         K8S_NAMESPACE   = "default"
+        KUBECONFIG = 'C:\\ProgramData\\Jenkins\\.kube\\config'
+
     }
 
     stages {
