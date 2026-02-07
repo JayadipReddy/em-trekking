@@ -18,8 +18,8 @@ pipeline {
 
         stage('Build Docker Images') {
             steps {
-                bat "docker build -t %DOCKER_USERNAME%/%BACKEND_IMAGE%:%BUILD_NUMBER% backend"
-                bat "docker build -t %DOCKER_USERNAME%/%FRONTEND_IMAGE%:%BUILD_NUMBER% frontend"
+                bat "docker build -t %DOCKER_USERNAME%/%BACKEND_IMAGE%:latest-test"
+                bat "docker build -t %DOCKER_USERNAME%/%FRONTEND_IMAGE%:latest-test"
             }
         }
 
@@ -37,17 +37,15 @@ pipeline {
 
         stage('Push to Docker Hub') {
             steps {
-                bat "docker push %DOCKER_USERNAME%/%BACKEND_IMAGE%:%BUILD_NUMBER%"
-                bat "docker push %DOCKER_USERNAME%/%FRONTEND_IMAGE%:%BUILD_NUMBER%"
+                bat "docker push %DOCKER_USERNAME%/%BACKEND_IMAGE%:latest-test"
+                bat "docker push %DOCKER_USERNAME%/%FRONTEND_IMAGE%:latest-test"
             }
         }
 
         stage('Deploy to Kubernetes') {
             steps {
                 bat "kubectl apply -f k8s/backend-deployment.yaml"
-                bat "kubectl apply -f k8s/backend-service.yaml"
                 bat "kubectl apply -f k8s/frontend-deployment.yaml"
-                bat "kubectl apply -f k8s/frontend-service.yaml"
             }
         }
     }
