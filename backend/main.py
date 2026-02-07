@@ -7,6 +7,7 @@ import time
 from database import SessionLocal, engine
 from models import Base, User
 from schemas import RegisterRequest, LoginRequest
+import os
 
 app = FastAPI()
 
@@ -30,13 +31,17 @@ def get_db():
 # ✅ WAIT for DB before creating tables
 @app.on_event("startup")
 def startup_event():
+    if os.getenv("SKIP_DB", "false").lower() == "true":
+        print("⚠️ Skipping DB connection (SKIP_DB=true)")
+        return
+
     retries = 10
     while retries > 0:
         try:
             Base.metadata.create_all(bind=engine)
             print("✅ Database connected")
             break
-        except OperationalError as e:
+        except OperationalError:
             print("⏳ Database not ready, retrying...")
             retries -= 1
             time.sleep(3)
