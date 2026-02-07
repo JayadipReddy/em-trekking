@@ -2,12 +2,12 @@ from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import OperationalError
+from sqlalchemy import text
 import time
 
 from database import SessionLocal, engine
 from models import Base, User
 from schemas import RegisterRequest, LoginRequest
-import os
 
 app = FastAPI()
 
@@ -28,28 +28,29 @@ def get_db():
     finally:
         db.close()
 
-# ✅ WAIT for DB before creating tables
-
+# ✅ WAIT for DB before app starts (K8s-safe)
 @app.on_event("startup")
 def startup_event():
-    if os.getenv("SKIP_DB") == "true":
-        print("⚠️ SKIP_DB=true → Skipping database initialization")
-        return
-
     retries = 10
+
     while retries > 0:
         try:
+            # 🔍 lightweight connection test
+            with engine.connect() as conn:
+                conn.execute(text("SELECT 1"))
+
+            # 🧱 create tables AFTER DB is reachable
             Base.metadata.create_all(bind=engine)
-            print("✅ Database connected")
-            break
-        except OperationalError:
-            print("⏳ Database not ready, retrying...")
+
+            print("✅ Database connected & tables ready")
+            return
+
+        except OperationalError as e:
+            print(f"⏳ Database not ready, retrying... ({retries})")
             retries -= 1
             time.sleep(3)
 
-    if retries == 0:
-        raise Exception("❌ Database connection failed")
-
+    raise Exception("❌ Database connection failed after retries")
 
 # ✅ Register
 @app.post("/register")
