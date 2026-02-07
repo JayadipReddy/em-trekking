@@ -29,10 +29,11 @@ def get_db():
         db.close()
 
 # ✅ WAIT for DB before creating tables
+
 @app.on_event("startup")
 def startup_event():
     if os.getenv("SKIP_DB") == "true":
-        print("⚠️ SKIP_DB enabled, skipping DB connection")
+        print("⚠️ SKIP_DB=true → Skipping database initialization")
         return
 
     retries = 10
