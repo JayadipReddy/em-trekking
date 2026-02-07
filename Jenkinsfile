@@ -18,8 +18,8 @@ pipeline {
 
         stage('Build Docker Images') {
             steps {
-                bat "docker build -t %DOCKER_USERNAME%/%BACKEND_IMAGE%:latest-test"
-                bat "docker build -t %DOCKER_USERNAME%/%FRONTEND_IMAGE%:latest-test"
+                bat "docker build -t %DOCKER_USERNAME%/%BACKEND_IMAGE%:latest-test backend"
+                bat "docker build -t %DOCKER_USERNAME%/%FRONTEND_IMAGE%:latest-test frontend"
             }
         }
 
