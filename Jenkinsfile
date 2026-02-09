@@ -46,8 +46,8 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                bat "kubectl delete -f k8s/backend-deployment.yaml"
-                bat "kubectl delete -f k8s/frontend-deployment.yaml"
+                // bat "kubectl delete -f k8s/backend-deployment.yaml"
+                // bat "kubectl delete -f k8s/frontend-deployment.yaml"
                 bat "kubectl apply -f k8s/backend-deployment.yaml"
                 bat "kubectl apply -f k8s/frontend-deployment.yaml"
             }
