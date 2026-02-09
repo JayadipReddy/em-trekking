@@ -6,8 +6,9 @@ pipeline {
         BACKEND_IMAGE   = "trekky-backend"
         FRONTEND_IMAGE  = "trekky-frontend"
         K8S_NAMESPACE   = "default"
-        KUBECONFIG = 'C:\\ProgramData\\Jenkins\\.kube\\config'
 
+        // ✅ USE USER KUBECONFIG (NO ADMIN REQUIRED)
+        KUBECONFIG = 'C:\\Users\\Jayadip.Reddy\\.kube\\config'
     }
 
     stages {
@@ -47,19 +48,15 @@ pipeline {
         stage('Verify Kubernetes Access') {
             steps {
                 bat '''
-                echo KUBECONFIG=%KUBECONFIG%
+                echo Using kubeconfig: %KUBECONFIG%
                 kubectl config current-context
                 kubectl get nodes
                 '''
             }
         }
 
-
-        
         stage('Deploy to Kubernetes') {
             steps {
-                // bat "kubectl delete -f k8s/backend-deployment.yaml"
-                // bat "kubectl delete -f k8s/frontend-deployment.yaml"
                 bat "kubectl apply -f k8s/backend-deployment.yaml"
                 bat "kubectl apply -f k8s/frontend-deployment.yaml"
             }
