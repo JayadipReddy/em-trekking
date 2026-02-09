@@ -44,15 +44,16 @@ pipeline {
             }
         }
 
-        stage('Who am I') {
+        stage('Verify Kubernetes Access') {
             steps {
                 bat '''
                 echo KUBECONFIG=%KUBECONFIG%
-                kubectl config view
+                kubectl config current-context
                 kubectl get nodes
                 '''
             }
         }
+
 
         
         stage('Deploy to Kubernetes') {
