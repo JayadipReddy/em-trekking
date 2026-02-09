@@ -44,6 +44,17 @@ pipeline {
             }
         }
 
+        stage('Who am I') {
+            steps {
+                bat '''
+                echo KUBECONFIG=%KUBECONFIG%
+                kubectl config view
+                kubectl get nodes
+                '''
+            }
+        }
+
+        
         stage('Deploy to Kubernetes') {
             steps {
                 // bat "kubectl delete -f k8s/backend-deployment.yaml"
