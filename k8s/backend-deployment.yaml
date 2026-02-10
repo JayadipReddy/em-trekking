@@ -18,4 +18,14 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
-
+        env:
+        - name: DB_HOST
+          value: database
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_USER
+          value: postgres
+        - name: DB_PASSWORD
+          value: root
+        - name: DB_NAME
+          value: trekky-hub
