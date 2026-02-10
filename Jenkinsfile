@@ -8,7 +8,7 @@ pipeline {
         K8S_NAMESPACE   = "default"
  
         // ✅ USE USER KUBECONFIG (NO ADMIN REQUIRED)
-        KUBECONFIG = 'C:\\Users\\Navata.Poojari\\.kube\\config'
+        KUBECONFIG = 'C:\Users\Navata.Poojari\.kube\config'
     }
  
     stages {
