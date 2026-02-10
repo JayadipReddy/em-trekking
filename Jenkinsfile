@@ -2,7 +2,7 @@ pipeline {
     agent any
  
     environment {
-        DOCKER_USERNAME = "jayadip07"
+        DOCKER_USERNAME = "navatha24"
         BACKEND_IMAGE   = "trekky-backend"
         FRONTEND_IMAGE  = "trekky-frontend"
         K8S_NAMESPACE   = "default"
@@ -29,7 +29,7 @@ pipeline {
         stage('Docker Login') {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: 'dockerhub-creds',
+                    credentialsId: 'navatha24',
                     usernameVariable: 'DH_USER',
                     passwordVariable: 'DH_PASS'
                 )]) {
