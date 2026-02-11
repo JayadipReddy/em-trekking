@@ -35,22 +35,19 @@ def startup_event():
 
     while retries > 0:
         try:
-            # 🔍 lightweight connection test
             with engine.connect() as conn:
                 conn.execute(text("SELECT 1"))
 
-            # 🧱 create tables AFTER DB is reachable
             Base.metadata.create_all(bind=engine)
-
             print("✅ Database connected & tables ready")
             return
 
-        except OperationalError as e:
+        except OperationalError:
             print(f"⏳ Database not ready, retrying... ({retries})")
             retries -= 1
             time.sleep(3)
 
-    raise Exception("❌ Database connection failed after retries")
+    print("❌ Database connection failed after retries, continuing...")
 
 # ✅ Register
 @app.post("/register")
