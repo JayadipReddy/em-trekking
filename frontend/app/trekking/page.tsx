@@ -47,6 +47,11 @@ export default function TrekkingPage() {
     slug: "horsley-hills",
     image: "https://www.savaari.com/blog/wp-content/uploads/2022/04/48558708151_ac21de557f_c.jpg",
   },
+    {
+    name: "Mamandur Forest",
+    slug: "mamandur-forest",
+    image: "https://lh3.googleusercontent.com/gps-cs-s/AHVAweosnCfuOPzyyssxqTaMRnTGtHEM_IA-ICHADq_1p39wKR2Y6zI5s1amZ0jiU4u6xietx05m5rri1Lc_7UmRGDfnfbn4TuZmT8B-9skt8vfFXzvTgPk3GJaC2f3Sa22iSGXZnS1gZg=w408-h723-k-no",
+  },
 ];
 
 
