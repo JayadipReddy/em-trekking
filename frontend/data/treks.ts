@@ -105,4 +105,15 @@ export const treks = [
       "Mamandur Waterfalls, located about 24-60 km from Tirupati near Mamandur village, is a serene, lesser-known nature spot within the Seshachalam Hills, ideal for picnics. Surrounded by lush green forest, it features seasonal water flowing from 18 theerthams, best visited between November and February. The area offers trekking, rocky landscapes, and scenic, tranquil surroundings. ",
     googleMapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15501.867799356478!2d79.4483121554199!3d13.750690899999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4d49d5f8b44737%3A0xff6e2d4cc0a70312!2sMamanduru%20Forest!5e0!3m2!1sen!2sin!4v1770811885819!5m2!1sen!2sin",
   },
+   {
+    slug: "chandragiri-fort",
+    name: "Chandragiri Fort",
+    image: "https://lh3.googleusercontent.com/gps-cs-s/AHVAweod0p_boCC1Up9u-hLoIzybhTR7IFh1Tp7iNnTQEUhv6nwjcsXHYRpBmSNPKU6P6wAqTdNtO1Er8_qulHw5p8xT1RekC_r8BzMVxbN0Uq4K_AHLZ10hQSqISDvGS6B7VbPUlt9I=w270-h312-n-k-no",
+    distance: "16 km from Tirupati",
+    difficulty: "Easy",
+    bestTime: "January – December",
+    description:
+      "Chandragiri Fort is an 11th-century, 25-acre historical stronghold near Tirupati, Andhra Pradesh, known for its hilltop location and Indo-Saracenic architecture. It famously served as the fourth capital of the Vijayanagara Empire and features the 3-story Raja Mahal (now a museum), Rani Mahal, and8 ruined temples, built without timber." ,
+    googleMapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3878.2254274438787!2d79.30278377508719!3d13.583034886791463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb2b3f75c9a233f%3A0xae39276156e407ac!2sChandragiri%20Fort!5e0!3m2!1sen!2sin!4v1770813462724!5m2!1sen!2sin"
+  },
 ];
