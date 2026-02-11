@@ -94,4 +94,15 @@ export const treks = [
       "Horsley Hills is a popular hill station in Andhra Pradesh known for its cool climate, panoramic viewpoints, and light trekking trails. It is ideal for weekend trips, nature walks, and sunrise viewpoints rather than intense trekking.",
     googleMapsEmbed:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7754.239452254405!2d78.39260638783368!3d13.650480272749055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb2420fb750b005%3A0x72fa353f62872a00!2sHorsley%20Hills%2C%20Andhra%20Pradesh%20517326!5e0!3m2!1sen!2sin!4v1770804518906!5m2!1sen!2sin",
   },
+  {
+    slug: "mamandur-forest",
+    name: "Mamandur Forest",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8IDUp3k8oMyC7KJnA4MQSWb-u80HN003FlL3frn2xbA&s",
+    distance: "25 km from Tirupati",
+    difficulty: "Challenging",
+    bestTime: "October – January",
+    description:
+      "Mamandur Waterfalls, located about 24-60 km from Tirupati near Mamandur village, is a serene, lesser-known nature spot within the Seshachalam Hills, ideal for picnics. Surrounded by lush green forest, it features seasonal water flowing from 18 theerthams, best visited between November and February. The area offers trekking, rocky landscapes, and scenic, tranquil surroundings. ",
+    googleMapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15501.867799356478!2d79.4483121554199!3d13.750690899999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4d49d5f8b44737%3A0xff6e2d4cc0a70312!2sMamanduru%20Forest!5e0!3m2!1sen!2sin!4v1770811885819!5m2!1sen!2sin",
+  },
 ];
