@@ -4,11 +4,8 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    const API_BASE =
-      process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8000";
-
     const backendResponse = await fetch(
-      `${API_BASE}/login`,
+      "http://backend-service:8000/login",
       {
         method: "POST",
         headers: {
