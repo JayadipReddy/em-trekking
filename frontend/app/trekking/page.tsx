@@ -52,6 +52,11 @@ export default function TrekkingPage() {
     slug: "mamandur-forest",
     image: "https://lh3.googleusercontent.com/gps-cs-s/AHVAweosnCfuOPzyyssxqTaMRnTGtHEM_IA-ICHADq_1p39wKR2Y6zI5s1amZ0jiU4u6xietx05m5rri1Lc_7UmRGDfnfbn4TuZmT8B-9skt8vfFXzvTgPk3GJaC2f3Sa22iSGXZnS1gZg=w408-h723-k-no",
   },
+  {
+    name: "Chandragiri Fort",
+    slug: "chandragiri-fort",
+    image: "https://lh3.googleusercontent.com/gps-cs-s/AHVAweod0p_boCC1Up9u-hLoIzybhTR7IFh1Tp7iNnTQEUhv6nwjcsXHYRpBmSNPKU6P6wAqTdNtO1Er8_qulHw5p8xT1RekC_r8BzMVxbN0Uq4K_AHLZ10hQSqISDvGS6B7VbPUlt9I=w270-h312-n-k-no",
+  },
 ];
 
 
