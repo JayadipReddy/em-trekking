@@ -2,23 +2,13 @@ import { treks } from "@/data/treks";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { MapPin, Mountain, Calendar } from "lucide-react";
-import { useEffect, useState } from "react";
+import WeatherCard from "./WeatherCard";
 
 export default async function TrekDetails({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
-
-  const [weather, setWeather] = useState<any>(null);
-
-  useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/weather?lat=${trek.lat}&lon=${trek.lon}`)
-      .then(res => res.json())
-      .then(data => setWeather(data));
-  }, [trek.lat, trek.lon]);
-
-  
   const { slug } = await params;
 
   const trek = treks.find((t) => t.slug === slug);
@@ -29,15 +19,15 @@ export default async function TrekDetails({
     <div className="min-h-screen bg-gray-100 pb-16">
 
       {/* Hero Image */}
-    <div className="w-full flex justify-center mt-8">
-      <div className="relative w-[90%] md:w-[75%] lg:w-[60%] aspect-[16/9] rounded-xl overflow-hidden shadow-md">
-        <img
-          src={trek.image}
-          alt={trek.name}
-          className="w-full h-full object-contain bg-black"
-        />
+      <div className="w-full flex justify-center mt-8">
+        <div className="relative w-[90%] md:w-[75%] lg:w-[60%] aspect-[16/9] rounded-xl overflow-hidden shadow-md">
+          <img
+            src={trek.image}
+            alt={trek.name}
+            className="w-full h-full object-contain bg-black"
+          />
+        </div>
       </div>
-    </div>
 
       {/* Content Card */}
       <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-10 -mt-10 relative z-10">
@@ -79,19 +69,9 @@ export default async function TrekDetails({
           </p>
         </div>
 
-        {weather && (
-          <div className="mt-8 p-6 bg-blue-50 rounded-xl shadow-sm">
-            <h3 className="text-lg font-semibold mb-3">
-              Current Weather
-            </h3>
-            <p>🌡 Temperature: {weather.temperature}°C</p>
-            <p>🌥 Condition: {weather.condition}</p>
-            <p>💨 Wind Speed: {weather.wind_speed} m/s</p>
-            <p>💧 Humidity: {weather.humidity}%</p>
-          </div>
-        )}
+        {/* ✅ Weather Section (Client Component) */}
+        <WeatherCard lat={trek.lat} lon={trek.lon} />
 
-        
         {/* Map Section */}
         <div className="mt-12">
           <h2 className="text-2xl font-semibold mb-6 border-b pb-2">
