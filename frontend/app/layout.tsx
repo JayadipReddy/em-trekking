@@ -2,7 +2,7 @@
 import "./globals.css";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function RootLayout({
   children,
@@ -10,27 +10,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const [user, setUser] = useState<string | null>(null);
-  const router = useRouter();
+  const pathname = usePathname(); // 👈 detects route change
 
   useEffect(() => {
-    const loggedUser = localStorage.getItem("user");
-    setUser(loggedUser);
-  }, []);
+    const storedUser = localStorage.getItem("user");
+    setUser(storedUser);
+  }, [pathname]); // 👈 re-check when page changes
 
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser(null);
-    router.push("/login");
+    window.location.href = "/login";
   };
 
   return (
     <html lang="en">
       <body className="bg-gray-100">
-        {/* 🔷 Header */}
         <header className="bg-white shadow-sm">
           <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
             
-            {/* Logo */}
             <Link href="/">
               <img
                 src="/logo.png"
@@ -39,25 +37,35 @@ export default function RootLayout({
               />
             </Link>
 
-            {/* User Section */}
-            {user && (
-              <div className="flex items-center gap-4">
-                <div className="bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-sm font-medium">
-                  {user}
-                </div>
+        {user && (
+          <div className="flex items-center gap-4">
 
-                <button
-                  onClick={handleLogout}
-                  className="px-4 py-1 bg-red-500 text-white rounded-lg text-sm hover:bg-red-600 transition"
-                >
-                  Logout
-                </button>
-              </div>
-            )}
+          {/* Profile Avatar */}
+          <div className="flex items-center gap-3 bg-gray-50 px-3 py-1 rounded-full shadow-sm">
+            
+            <div className="w-9 h-9 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white font-semibold">
+              {user.charAt(0).toUpperCase()}
+            </div>
+      
+            <span className="text-gray-800 font-medium text-sm">
+              {user}
+            </span>
+          </div>
+      
+          {/* Logout Button */}
+          <button
+            onClick={handleLogout}
+            className="text-sm px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 transition"
+          >
+            Logout
+          </button>
+      
+        </div>
+      )}
+
           </div>
         </header>
 
-        {/* Page Content */}
         <main>{children}</main>
       </body>
     </html>
