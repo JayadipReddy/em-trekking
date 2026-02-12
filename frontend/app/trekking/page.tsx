@@ -57,15 +57,15 @@ export default function TrekkingPage() {
     slug: "chandragiri-fort",
     image: "https://lh3.googleusercontent.com/gps-cs-s/AHVAweod0p_boCC1Up9u-hLoIzybhTR7IFh1Tp7iNnTQEUhv6nwjcsXHYRpBmSNPKU6P6wAqTdNtO1Er8_qulHw5p8xT1RekC_r8BzMVxbN0Uq4K_AHLZ10hQSqISDvGS6B7VbPUlt9I=w270-h312-n-k-no",
   },
-   {
-    name: "Kailasakona Falls",
+  {
     slug: "kailasakona-falls",
-    image: "https://lh3.googleusercontent.com/gps-cs-s/AHVAweod0p_boCC1Up9u-hLoIzybhTR7IFh1Tp7iNnTQEUhv6nwjcsXHYRpBmSNPKU6P6wAqTdNtO1Er8_qulHw5p8xT1RekC_r8BzMVxbN0Uq4K_AHLZ10hQSqISDvGS6B7VbPUlt9I=w270-h312-n-k-no",
+    name: "Kailasakona Falls",
+    image: "https://th.bing.com/th/id/OIP.fshnvkF2chDDJ-DR6wsXmwHaHJ?w=191&h=184&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
   },
-   {
-    name: "Moolakona Falls",
+  {
     slug: "moolakona-falls",
-    image: "https://lh3.googleusercontent.com/gps-cs-s/AHVAweod0p_boCC1Up9u-hLoIzybhTR7IFh1Tp7iNnTQEUhv6nwjcsXHYRpBmSNPKU6P6wAqTdNtO1Er8_qulHw5p8xT1RekC_r8BzMVxbN0Uq4K_AHLZ10hQSqISDvGS6B7VbPUlt9I=w270-h312-n-k-no",
+    name: "Moolakona Falls",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsRNv2Iyh92U0BK5dUhj28zZRbY0JGqZoLzA&s",
   },
 ];
 
