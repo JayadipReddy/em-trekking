@@ -60,12 +60,12 @@ export default function TrekkingPage() {
    {
     name: "Kailasakona Falls",
     slug: "kailasakona-falls",
-    image: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12958.231513678835!2d79.63272790531167!3d13.387245229490675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4d58b5298afe09%3A0x4f36e6b3da303014!2sKailasa%20Kona%20falls!5e1!3m2!1sen!2sin!4v1770869943828!5m2!1sen!2sin",
+    image: "https://www.bing.com/th/id/OSK.m2yN8BvxvXuetMcqA-1v0dJyyt_j7CwxmSqGVYfxFTI?w=310&h=200&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2",
   },
    {
     name: "Moolakona Falls",
     slug: "moolakona-falls",
-    image: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3879.980074975068!2d79.6204636!3d13.475325399999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4d5b56abe8a857%3A0x6a8e2ae5291cfbb6!2sMoola%20Kona%20Waterfalls!5e0!3m2!1sen!2sin!4v1770870326785!5m2!1sen!2sin",
+    image: "https://th.bing.com/th/id/OIP.Q7FlJMkaureO_wEWJei2FQHaE7?w=269&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
   },
 ];
 
