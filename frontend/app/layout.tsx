@@ -2,6 +2,7 @@
 import "./globals.css";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function RootLayout({
   children,
@@ -9,11 +10,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const [user, setUser] = useState<string | null>(null);
+  const pathname = usePathname(); // 👈 detects route change
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     setUser(storedUser);
-  }, []);
+  }, [pathname]); // 👈 re-check when page changes
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -48,7 +50,6 @@ export default function RootLayout({
                 </button>
               </div>
             )}
-
           </div>
         </header>
 
