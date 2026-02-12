@@ -72,7 +72,9 @@ console.log("Available slugs:", treks.map(t => t.slug));
         </div>
 
         {/* ✅ Weather Section (Client Component) */}
-        <WeatherCard lat={trek.lat} lon={trek.lon} />
+        {trek.lat && trek.lon && (
+          <WeatherCard lat={trek.lat} lon={trek.lon} />
+        )}
 
         {/* Map Section */}
         <div className="mt-12">
