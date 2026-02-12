@@ -12,8 +12,6 @@ export default function TrekDetails({
   const { slug } = params;
 
   const trek = treks.find((t) => t.slug === slug);
-console.log("Slug from URL:", slug);
-console.log("Available slugs:", treks.map(t => t.slug));
 
   if (!trek) return notFound();
 
