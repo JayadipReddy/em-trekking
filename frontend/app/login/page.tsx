@@ -13,8 +13,6 @@ export default function LoginPage() {
     router.push("/trekking");
   }
   }, []);
-
-console.log("Login response:", data);
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +23,7 @@ console.log("Login response:", data);
     e.preventDefault();
     setError("");
     setLoading(true);
-
+console.log("Login response:", data);
     try {
       const response = await fetch("/api/login", {
         method: "POST",
