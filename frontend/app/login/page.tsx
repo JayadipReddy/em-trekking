@@ -1,12 +1,20 @@
 "use client";
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import Link from "next/link";
+
 
 export default function LoginPage() {
   const router = useRouter();
+  useEffect(() => {
+  const user = localStorage.getItem("user");
+  if (user) {
+    router.push("/trekking");
+  }
+  }, []);
 
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
