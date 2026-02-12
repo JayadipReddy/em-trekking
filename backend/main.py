@@ -8,11 +8,9 @@ import time
 from database import SessionLocal, engine
 from models import Base, User
 from schemas import RegisterRequest, LoginRequest
-import requests
-import os
 
 app = FastAPI()
-WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
+
 # ✅ CORS
 app.add_middleware(
     CORSMiddleware,
@@ -85,20 +83,3 @@ def login(user: LoginRequest, db: Session = Depends(get_db)):
         return {"success": False, "message": "Invalid email or password"}
 
     return {"success": True, "message": "Login successful"}
-
-@app.get("/weather")
-def get_weather(lat: float, lon: float):
-    url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={WEATHER_API_KEY}&units=metric"
-
-    response = requests.get(url)
-    data = response.json()
-
-    if response.status_code != 200:
-        return {"error": "Unable to fetch weather"}
-
-    return {
-        "temperature": data["main"]["temp"],
-        "condition": data["weather"][0]["description"],
-        "humidity": data["main"]["humidity"],
-        "wind_speed": data["wind"]["speed"]
-    }
