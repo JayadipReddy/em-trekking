@@ -116,4 +116,15 @@ export const treks = [
       "Chandragiri Fort is an 11th-century, 25-acre historical stronghold near Tirupati, Andhra Pradesh, known for its hilltop location and Indo-Saracenic architecture. It famously served as the fourth capital of the Vijayanagara Empire and features the 3-story Raja Mahal (now a museum), Rani Mahal, and8 ruined temples, built without timber." ,
     googleMapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3878.2254274438787!2d79.30278377508719!3d13.583034886791463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb2b3f75c9a233f%3A0xae39276156e407ac!2sChandragiri%20Fort!5e0!3m2!1sen!2sin!4v1770813462724!5m2!1sen!2sin"
   },
+  {
+    slug: "kailasakona-falls",
+    name: "Kailasakona Falls",
+    image: "https://th.bing.com/th/id/OIP.fshnvkF2chDDJ-DR6wsXmwHaHJ?w=191&h=184&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+    distance: "48 km from Tirupati",
+    difficulty: "Easy",
+    bestTime: "June – September",
+    description:
+      "Kailasakona Waterfalls is a serene escape nestled in the green hills of Andhra Pradesh. This natural wonder, located near Tirupati, offers a tranquil retreat for nature lovers and spiritual seekers alike. The waterfall, which cascades from a height of about 40 feet, is surrounded by lush greenery and rocky formations, creating a picturesque setting." ,
+    googleMapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12958.231513678835!2d79.63272790531167!3d13.387245229490675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4d58b5298afe09%3A0x4f36e6b3da303014!2sKailasa%20Kona%20falls!5e1!3m2!1sen!2sin!4v1770869943828!5m2!1sen!2sin",
+  },
 ];
