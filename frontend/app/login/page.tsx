@@ -31,12 +31,19 @@ export default function LoginPage() {
 
       const data = await response.json();
 
-      if (!response.ok || data.success === false) {
-        setError(data.message || "Invalid email or password");
-      } else {
-        // ✅ Login success → redirect to trekking page
-        router.push("/trekking");
-      }
+    if (!response.ok || data.success === false) {
+      setError(data.message || "Invalid email or password");
+    } else {
+      // ✅ Save logged in user (store email for now)
+      localStorage.setItem("user", email);
+    
+      // Optional: if backend returns name
+      // localStorage.setItem("user", data.name);
+    
+      // Redirect to trekking page
+      router.push("/trekking");
+    }
+
     } catch (err) {
       setError("Server not reachable");
     } finally {
