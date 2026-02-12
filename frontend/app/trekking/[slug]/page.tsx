@@ -18,13 +18,15 @@ export default async function TrekDetails({
     <div className="min-h-screen bg-gray-100 pb-16">
 
       {/* Hero Image */}
-    <div className="relative h-36 w-2/3 rounded-lg overflow-hidden mt-6">
+    <div className="w-full flex justify-center mt-8">
+      <div className="relative w-[90%] md:w-[75%] lg:w-[60%] aspect-[16/9] rounded-xl overflow-hidden shadow-md">
         <img
-            src={trek.image}
-            alt={trek.name}
-            className="w-full h-full object-cover"
+          src={trek.image}
+          alt={trek.name}
+          className="w-full h-full object-contain bg-black"
         />
       </div>
+    </div>
 
       {/* Content Card */}
       <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-10 -mt-10 relative z-10">
