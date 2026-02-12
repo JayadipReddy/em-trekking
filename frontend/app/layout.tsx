@@ -11,6 +11,7 @@ export default function RootLayout({
 }) {
   const [user, setUser] = useState<string | null>(null);
   const pathname = usePathname(); // 👈 detects route change
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -37,12 +38,14 @@ export default function RootLayout({
               />
             </Link>
 
-        {user && (
-          <div className="flex items-center gap-4">
-
-          {/* Profile Avatar */}
-          <div className="flex items-center gap-3 bg-gray-50 px-3 py-1 rounded-full shadow-sm">
-            
+      {user && (
+        <div className="relative">
+      
+          {/* Avatar Button */}
+          <div
+            onClick={() => setOpen(!open)}
+            className="flex items-center gap-3 bg-gray-50 px-3 py-1 rounded-full shadow-sm cursor-pointer hover:bg-gray-100 transition"
+          >
             <div className="w-9 h-9 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white font-semibold">
               {user.charAt(0).toUpperCase()}
             </div>
@@ -52,18 +55,19 @@ export default function RootLayout({
             </span>
           </div>
       
-          {/* Logout Button */}
-          <button
-            onClick={handleLogout}
-            className="text-sm px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 transition"
-          >
-            Logout
-          </button>
-      
+          {/* Dropdown */}
+          {open && (
+            <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border py-2 z-50">
+              <button
+                onClick={handleLogout}
+                className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+              >
+                Logout
+              </button>
+            </div>
+          )}
         </div>
       )}
-
-          </div>
         </header>
 
         <main>{children}</main>
