@@ -19,38 +19,41 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
-console.log("Login response:", data);
-    try {
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
+const handleLogin = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setError("");
+  setLoading(true);
 
-      const data = await response.json();
+  try {
+    const response = await fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+
+    const data = await response.json();
+
+    console.log("Login response:", data); // ✅ Correct place
 
     if (!response.ok) {
-      setError("Invalid email or password");
+      setError(data.message || "Invalid email or password");
     } else {
       localStorage.setItem("user", email);
       router.push("/trekking");
     }
-      
-    } catch (err) {
-      setError("Server not reachable");
-    } finally {
-      setLoading(false);
-    }
-  };
+
+  } catch (err) {
+    setError("Server not reachable");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-100">
