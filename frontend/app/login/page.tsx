@@ -14,6 +14,7 @@ export default function LoginPage() {
   }
   }, []);
 
+console.log("Login response:", data);
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,19 +40,13 @@ export default function LoginPage() {
 
       const data = await response.json();
 
-    if (!response.ok || data.success === false) {
-      setError(data.message || "Invalid email or password");
+    if (!response.ok) {
+      setError("Invalid email or password");
     } else {
-      // ✅ Save logged in user (store email for now)
       localStorage.setItem("user", email);
-    
-      // Optional: if backend returns name
-      // localStorage.setItem("user", data.name);
-    
-      // Redirect to trekking page
       router.push("/trekking");
     }
-
+      
     } catch (err) {
       setError("Server not reachable");
     } finally {
