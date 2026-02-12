@@ -35,7 +35,7 @@ export default function LoginPage() {
       setError(data.message || "Invalid email or password");
     } else {
       // ✅ Save logged in user (store email for now)
-      localStorage.setItem("user", name);
+      localStorage.setItem("user", email);
     
       // Optional: if backend returns name
       // localStorage.setItem("user", data.name);
