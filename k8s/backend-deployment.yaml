@@ -18,4 +18,8 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
+        env:
+        - name: WEATHER_API_KEY
+          value: "c96f92df9d1609a7318f5469fb71f6fd"
+
 
