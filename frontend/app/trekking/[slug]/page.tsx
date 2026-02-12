@@ -4,12 +4,12 @@ import Link from "next/link";
 import { MapPin, Mountain, Calendar } from "lucide-react";
 import WeatherCard from "./WeatherCard";
 
-export default async function TrekDetails({
+export default function TrekDetails({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
-  const { slug } = await params;
+  const { slug } = params;
 
   const trek = treks.find((t) => t.slug === slug);
 
