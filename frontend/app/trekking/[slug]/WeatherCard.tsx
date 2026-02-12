@@ -6,7 +6,7 @@ export default function WeatherCard({ lat, lon }: { lat: number; lon: number }) 
   const [weather, setWeather] = useState<any>(null);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/weather?lat=${lat}&lon=${lon}`)
+    fetch(`/api/weather?lat=${trek.lat}&lon=${trek.lon}`)
       .then((res) => res.json())
       .then((data) => setWeather(data));
   }, [lat, lon]);
