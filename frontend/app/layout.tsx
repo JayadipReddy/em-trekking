@@ -42,8 +42,13 @@ export default function RootLayout({
             {/* User Section */}
             {user && (
               <div className="flex items-center gap-4">
-                <div className="bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-sm font-medium">
-                  {user}
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-semibold">
+                    {user.charAt(0).toUpperCase()}
+                  </div>
+                  <span className="text-sm font-medium text-gray-700">
+                    {user}
+                  </span>
                 </div>
 
                 <button
