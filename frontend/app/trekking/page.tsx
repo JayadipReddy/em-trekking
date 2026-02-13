@@ -67,6 +67,11 @@ export default function TrekkingPage() {
     slug: "moolakona-falls",
     image: "https://th.bing.com/th/id/OIP.Q7FlJMkaureO_wEWJei2FQHaE7?w=269&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
   },
+  {
+    name: "Appalayagunta",
+    slug: "appalayagunta",
+    image: "https://th.bing.com/th/id/OIP.Q7FlJMkaureO_wEWJei2FQHaE7?w=269&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+  },
 ];
 
 

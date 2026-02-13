@@ -162,4 +162,17 @@ export const treks = [
     lat: 13.7482,
     lon: 79.3208,
   },
+  {
+    slug: "appalayagunta",
+    name: "Appalayagunta",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsRNv2Iyh92U0BK5dUhj28zZRbY0JGqZoLzA&s",
+    distance: "18 km from Tirupati",
+    difficulty: "Easy",
+    bestTime: "October – November",
+    description:
+      "Moola Kona Waterfalls, located near Puttur and about 43 km from Tirupati, is a serene, seasonal, and lesser-known nature spot in Andhra Pradesh, ideal for weekend trips during the monsoon (Dec–Jan). It features crystal-clear water flowing from the Gajapath hill, forming small ponds with surrounding herbal foliage, offering a refreshing, natural escape. " ,
+    googleMapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3879.980074975068!2d79.6204636!3d13.475325399999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4d5b56abe8a857%3A0x6a8e2ae5291cfbb6!2sMoola%20Kona%20Waterfalls!5e0!3m2!1sen!2sin!4v1770870326785!5m2!1sen!2sin",
+    lat: 13.7482,
+    lon: 79.3208,
+  },
 ];
